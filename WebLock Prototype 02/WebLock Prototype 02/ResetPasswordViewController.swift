@@ -1,16 +1,18 @@
 //
-//  HomePageViewController.swift
+//  ResetPasswordViewController.swift
 //  WebLock Prototype 02
 //
-//  Created by allanshemah on 3/9/23.
+//  Created by allanshemah on 3/12/23.
 //
 
 import UIKit
-import FirebaseAuth
-import Firebase
 
-class HomePageViewController: UIViewController {
+class ResetPasswordViewController: UIViewController {
 
+    @IBOutlet var newpassword: UITextField!
+    
+    @IBOutlet var confirmpassword: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,19 +20,13 @@ class HomePageViewController: UIViewController {
     }
     
 
-    @IBAction func signoutTapped(_ sender: Any) {
-        
-        let firebaseAuth = Auth.auth()
-        do {
-          try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-          print("Error signing out: %@", signOutError)
-        }
-        
+    
+    @IBAction func resetTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "Start")
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true)
+
     }
     
 }

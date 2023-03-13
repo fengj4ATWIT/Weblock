@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4823FD1729BFC59700D5750C /* Main Page SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823FD1629BFC59700D5750C /* Main Page SwiftUIView.swift */; };
+		4823FD1929BFC64200D5750C /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4823FD1829BFC64200D5750C /* MainPageViewController.swift */; };
 		4852DE0029BAD6FC00672DFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852DDFF29BAD6FC00672DFD /* AppDelegate.swift */; };
 		4852DE0229BAD6FC00672DFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852DE0129BAD6FC00672DFD /* SceneDelegate.swift */; };
 		4852DE0429BAD6FC00672DFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852DE0329BAD6FC00672DFD /* ViewController.swift */; };
 		4852DE0729BAD6FC00672DFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4852DE0529BAD6FC00672DFD /* Main.storyboard */; };
-		4852DE0929BAD6FF00672DFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4852DE0829BAD6FF00672DFD /* Assets.xcassets */; };
 		4852DE0C29BAD6FF00672DFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4852DE0A29BAD6FF00672DFD /* LaunchScreen.storyboard */; };
 		4852DE1729BAD70000672DFD /* WebLock_Prototype_02Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852DE1629BAD70000672DFD /* WebLock_Prototype_02Tests.swift */; };
 		4852DE2129BAD70000672DFD /* WebLock_Prototype_02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852DE2029BAD70000672DFD /* WebLock_Prototype_02UITests.swift */; };
@@ -47,6 +48,10 @@
 		4852DE7029BAEAE900672DFD /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4852DE6F29BAEAE900672DFD /* FirebaseRemoteConfigSwift */; };
 		4852DE7229BAEAE900672DFD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4852DE7129BAEAE900672DFD /* FirebaseStorage */; };
 		4852DE7429BAEAE900672DFD /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 4852DE7329BAEAE900672DFD /* FirebaseStorageCombine-Community */; };
+		48790D1D29BFD774007419D0 /* Servers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48790D1C29BFD774007419D0 /* Servers.swift */; };
+		48790D1F29BFD7E6007419D0 /* CustomCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48790D1E29BFD7E6007419D0 /* CustomCorners.swift */; };
+		48790D2129BFD7F6007419D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48790D2029BFD7F5007419D0 /* Assets.xcassets */; };
+		487A117329BEC6DD00984F2C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A117229BEC6DD00984F2C /* ResetPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,12 +72,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4823FD1629BFC59700D5750C /* Main Page SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main Page SwiftUIView.swift"; sourceTree = "<group>"; };
+		4823FD1829BFC64200D5750C /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		4852DDFC29BAD6FC00672DFD /* WebLock Prototype 02.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WebLock Prototype 02.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4852DDFF29BAD6FC00672DFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4852DE0129BAD6FC00672DFD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4852DE0329BAD6FC00672DFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4852DE0629BAD6FC00672DFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4852DE0829BAD6FF00672DFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4852DE0B29BAD6FF00672DFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4852DE0D29BAD6FF00672DFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4852DE1229BAD70000672DFD /* WebLock Prototype 02Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WebLock Prototype 02Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +90,10 @@
 		4852DE3829BAE1AA00672DFD /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4852DE3A29BAE21300672DFD /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4852DE3C29BAE9B000672DFD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		48790D1C29BFD774007419D0 /* Servers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Servers.swift; path = ../../../WeblockProj/WeblockProj/Model/Servers.swift; sourceTree = "<group>"; };
+		48790D1E29BFD7E6007419D0 /* CustomCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCorners.swift; sourceTree = "<group>"; };
+		48790D2029BFD7F5007419D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../WeblockProj/WeblockProj/Assets.xcassets; sourceTree = "<group>"; };
+		487A117229BEC6DD00984F2C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,14 +171,19 @@
 		4852DDFE29BAD6FC00672DFD /* WebLock Prototype 02 */ = {
 			isa = PBXGroup;
 			children = (
+				48790D1C29BFD774007419D0 /* Servers.swift */,
+				48790D1E29BFD7E6007419D0 /* CustomCorners.swift */,
+				48790D2029BFD7F5007419D0 /* Assets.xcassets */,
 				4852DDFF29BAD6FC00672DFD /* AppDelegate.swift */,
 				4852DE0129BAD6FC00672DFD /* SceneDelegate.swift */,
 				4852DE0329BAD6FC00672DFD /* ViewController.swift */,
 				4852DE0529BAD6FC00672DFD /* Main.storyboard */,
+				4823FD1829BFC64200D5750C /* MainPageViewController.swift */,
+				4823FD1629BFC59700D5750C /* Main Page SwiftUIView.swift */,
+				487A117229BEC6DD00984F2C /* ResetPasswordViewController.swift */,
 				4852DE3A29BAE21300672DFD /* SignInViewController.swift */,
 				4852DE3829BAE1AA00672DFD /* SignUpViewController.swift */,
 				4852DE3329BAE00500672DFD /* HomePageViewController.swift */,
-				4852DE0829BAD6FF00672DFD /* Assets.xcassets */,
 				4852DE0A29BAD6FF00672DFD /* LaunchScreen.storyboard */,
 				4852DE3C29BAE9B000672DFD /* GoogleService-Info.plist */,
 				4852DE0D29BAD6FF00672DFD /* Info.plist */,
@@ -331,8 +346,8 @@
 			files = (
 				4852DE0C29BAD6FF00672DFD /* LaunchScreen.storyboard in Resources */,
 				4852DE3D29BAE9B100672DFD /* GoogleService-Info.plist in Resources */,
-				4852DE0929BAD6FF00672DFD /* Assets.xcassets in Resources */,
 				4852DE0729BAD6FC00672DFD /* Main.storyboard in Resources */,
+				48790D2129BFD7F6007419D0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +377,12 @@
 				4852DE3429BAE00500672DFD /* HomePageViewController.swift in Sources */,
 				4852DE0429BAD6FC00672DFD /* ViewController.swift in Sources */,
 				4852DE0029BAD6FC00672DFD /* AppDelegate.swift in Sources */,
+				48790D1F29BFD7E6007419D0 /* CustomCorners.swift in Sources */,
 				4852DE0229BAD6FC00672DFD /* SceneDelegate.swift in Sources */,
+				4823FD1729BFC59700D5750C /* Main Page SwiftUIView.swift in Sources */,
+				4823FD1929BFC64200D5750C /* MainPageViewController.swift in Sources */,
+				48790D1D29BFD774007419D0 /* Servers.swift in Sources */,
+				487A117329BEC6DD00984F2C /* ResetPasswordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

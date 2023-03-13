@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Start-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WebLock_Prototype_02" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Start" title="Start" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="WebLock_Prototype_02" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,7 +29,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Create Account"/>
                                 <connections>
-                                    <segue destination="96k-s7-zhl" kind="show" id="7Mi-jE-dij"/>
+                                    <segue destination="96k-s7-zhl" kind="showDetail" id="7Mi-jE-dij"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iag-6G-8Mz">
@@ -38,7 +38,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Login"/>
                                 <connections>
-                                    <segue destination="bRZ-Mq-kgM" kind="show" id="ibo-Eu-GgD"/>
+                                    <segue destination="bRZ-Mq-kgM" kind="showDetail" id="ibo-Eu-GgD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -79,6 +79,15 @@
                                     <action selector="signinTapped:" destination="bRZ-Mq-kgM" eventType="touchUpInside" id="6bP-1U-kQC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mnp-Kj-oks">
+                                <rect key="frame" x="121" y="438" width="152" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Forgot Password"/>
+                                <connections>
+                                    <segue destination="0JJ-JL-OJH" kind="showDetail" id="g5R-u3-Won"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aga-kW-3Tn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -88,12 +97,54 @@
                     <connections>
                         <outlet property="email" destination="MTy-d1-PPT" id="OyF-jI-HHW"/>
                         <outlet property="password" destination="A7y-OV-qM2" id="nhb-Gf-3IT"/>
-                        <segue destination="Wdk-3z-rAR" kind="show" id="or1-Sc-mzD"/>
+                        <segue destination="Wdk-3z-rAR" kind="showDetail" id="or1-Sc-mzD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ztC-qF-DAe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="881.67938931297704" y="-206.33802816901411"/>
+        </scene>
+        <!--Forgot Password-->
+        <scene sceneID="GvR-p3-Ur6">
+            <objects>
+                <viewController storyboardIdentifier="Reset" title="Forgot Password" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0JJ-JL-OJH" customClass="ResetPasswordViewController" customModule="WebLock_Prototype_02" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7ut-Iz-pNB">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LG9-eS-H83">
+                                <rect key="frame" x="148" y="197" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MkR-BO-1NS">
+                                <rect key="frame" x="148" y="273" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgt-wk-yw5">
+                                <rect key="frame" x="105" y="409" width="161" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Change Password"/>
+                                <connections>
+                                    <action selector="resetTapped:" destination="0JJ-JL-OJH" eventType="touchUpInside" id="QHb-FY-zRK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0KX-jV-UAn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="confirmpassword" destination="MkR-BO-1NS" id="fag-tV-rAV"/>
+                        <outlet property="newpassword" destination="LG9-eS-H83" id="gns-hB-49Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ixv-pe-VK6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1707" y="-577"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="Cvq-0c-z8S">
@@ -116,7 +167,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Create Account"/>
                                 <connections>
                                     <action selector="createaccountTapped:" destination="96k-s7-zhl" eventType="touchUpInside" id="4rm-AE-eh0"/>
-                                    <segue destination="Wdk-3z-rAR" kind="show" id="L9a-Jo-HR7"/>
+                                    <segue destination="Wdk-3z-rAR" kind="showDetail" id="L9a-Jo-HR7"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="an9-3R-Lqp">
@@ -140,29 +191,63 @@
             </objects>
             <point key="canvasLocation" x="882" y="499"/>
         </scene>
-        <!--Home Page View Controller-->
+        <!--Main Page View Controller-->
         <scene sceneID="IMB-Iw-Ymz">
             <objects>
-                <viewController storyboardIdentifier="Home Page" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wdk-3z-rAR" customClass="HomePageViewController" customModule="WebLock_Prototype_02" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home Page" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wdk-3z-rAR" customClass="MainPageViewController" customModule="WebLock_Prototype_02" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HLA-wi-RyN">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pI-Uw-MNm">
-                                <rect key="frame" x="154" y="103" width="87" height="35"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYX-sq-ODY">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Settings"/>
-                            </button>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HOj-IT-Ki2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="BSW-FO-UtY"/>
+                    <connections>
+                        <outlet property="theContainer" destination="dYX-sq-ODY" id="Dy6-Vk-eBg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lyl-GK-q1x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1980.916030534351" y="141.5492957746479"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="SC2-iI-I2P">
+            <objects>
+                <viewController id="lSU-bE-2oo" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pcv-iQ-86D">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Iq-gA-F24">
+                                <rect key="frame" x="174" y="229" width="90" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signoutTapped:" destination="Wdk-3z-rAR" eventType="touchUpInside" id="ZJX-w2-LmI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pI-Uw-MNm">
+                                <rect key="frame" x="162" y="130" width="102" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Settings"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="IWC-7I-GIx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hE4-Aq-Qb2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2821" y="142"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
