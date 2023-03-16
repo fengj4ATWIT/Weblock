@@ -6,27 +6,41 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
 
 class ResetPasswordViewController: UIViewController {
-
-    @IBOutlet var newpassword: UITextField!
     
-    @IBOutlet var confirmpassword: UITextField!
+    
+    @IBOutlet var email: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
-
+    
     
     @IBAction func resetTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "Start")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true)
-
+        let auth = Auth.auth()
+        auth.sendPasswordReset(withEmail: email.text!) { (error) in
+            if let error = error {
+                let alert = UIAlertController(title: "My Alert", message: "Error", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            let alert = UIAlertController(title: "My Alert", message: "The password resent link was sent.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        
     }
-    
 }

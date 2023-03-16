@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import UIKit
+import FirebaseAuth
+import Firebase
 
 struct Main_Page_SwiftUIView: View {
     @State var isConnected = false
@@ -14,122 +17,119 @@ struct Main_Page_SwiftUIView: View {
     @State var changeServer = false
     
     var body: some View {
-        
-        VStack{
-            
-            HStack{
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "circle.grid.cross")
-                        .font(.title2)
-                        .padding(12)
-                        .background(
-                        
-                            RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(.white.opacity(0.25),lineWidth: 1)
-                        )
-                }
-
-                
-                Spacer()
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "slider.horizontal.3")
-                        .font(.title2)
-                        .padding(12)
-                        .background(
-                        
-                            RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(.white.opacity(0.25),lineWidth: 1)
-                        )
-                }
-            }
-            .overlay(
-            
-                
-                Text(getTitle())
-            )
-            .foregroundColor(.white)
-            
-         
-            PowerButton()
-            
+        NavigationView{
            
             VStack{
-                
-                Label {
-                    
-                    Text(isConnected ? "Connected" : "Not Connected")
-                    
-                } icon: {
-                    Image(systemName: isConnected ? "checkmark.shield" : "shield.slash")
-                }
-                .font(.system(size: 18, weight: .semibold))
-
-                
-                Spacer()
-                
+               
                 HStack{
+
                     
-                    HStack{
-                        
-                        Image(systemName: "arrow.down.to.line.circle")
-                            .font(.title2)
-                        
-                        VStack(alignment: .leading, spacing: 8) {
+                }
+                .navigationTitle("WebLock")
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarTrailing){
+                        Menu{
+                            Button(action: {}, label: {
+                                Text("Link VPN")
+                            })
+                            Button(action: {}, label: {
+                                Text("Firewall Configuration")
+                            })
+                            Button(action: {}, label: {
+                                Text("Account Management")
+                            })
+                            Button(action: {}, label: {
+                                Text("Sign Out")
+                            })
+                        }label: {
+                            Image(systemName: "slider.horizontal.3")
+                                .font(.title2)
+                                .padding(12)
+                                .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .strokeBorder(.white.opacity(0.25),lineWidth: 1))
                             
-                            Text("Download")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.gray)
-                            
-                            Text("\(isConnected ? "60.0" : "0") KB/s")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
                         }
                     }
+                }
+                .foregroundColor(.white)
+                
+                
+                PowerButton()
+                
+                
+                VStack{
+                    
+                    Label {
+                        
+                        Text(isConnected ? "Connected" : "Not Connected")
+                        
+                    } icon: {
+                        Image(systemName: isConnected ? "checkmark.shield" : "shield.slash")
+                    }
+                    .font(.system(size: 18, weight: .semibold))
+                    
                     
                     Spacer()
                     
                     HStack{
                         
-                        Image(systemName: "arrow.up.to.line.circle")
-                            .font(.title2)
+                        HStack{
+                            
+                            Image(systemName: "arrow.down.to.line.circle")
+                                .font(.title2)
+                            
+                            VStack(alignment: .leading, spacing: 8) {
+                                
+                                Text("Download")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.gray)
+                                
+                                Text("\(isConnected ? "60.0" : "0") KB/s")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            }
+                        }
                         
-                        VStack(alignment: .leading, spacing: 8) {
+                        Spacer()
+                        
+                        HStack{
                             
-                            Text("Upload")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.gray)
+                            Image(systemName: "arrow.up.to.line.circle")
+                                .font(.title2)
                             
-                            Text("\(isConnected ? "27.5" : "0") KB/s")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
+                            VStack(alignment: .leading, spacing: 8) {
+                                
+                                Text("Upload")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.gray)
+                                
+                                Text("\(isConnected ? "27.5" : "0") KB/s")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
+                    .frame(width: getRect().width - 100)
                 }
-                .frame(width: getRect().width - 100)
+                .animation(.none, value: isConnected)
+                // Max Frame...
+                .frame(height: 120)
+                .padding(.top,getRect().height < 750 ? 20 : 40)
+                
             }
-            .animation(.none, value: isConnected)
-            // Max Frame...
-            .frame(height: 120)
-            .padding(.top,getRect().height < 750 ? 20 : 40)
-           
+            
+            .padding()
+            .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
+            .background(
+                
+                Background()
+            )
         }
-        .padding()
-        .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
-        .background(
-        
-            Background()
-        )
-        
         .overlay(
         
             Rectangle()
@@ -142,11 +142,7 @@ struct Main_Page_SwiftUIView: View {
                     }
                 }
         )
-        .overlay(
-            BottomSheet(),
-            
-            alignment: .bottom
-        )
+        
         .ignoresSafeArea(.container, edges: .bottom)
       
         .preferredColorScheme(.dark)
@@ -469,7 +465,6 @@ struct Main_Page_SwiftUIView: View {
 }
 
 
-
 extension View{
     
     func getRect()->CGRect{
@@ -488,6 +483,8 @@ extension View{
         return safeArea
     }
 }
+
+
 
 struct Main_Page_SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {

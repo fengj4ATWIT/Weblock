@@ -10,31 +10,27 @@ import SwiftUI
 
 class ViewController: UIViewController {
     
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
     
-    @IBSegueAction func embedSwiftUIView(_ coder: NSCoder) -> UIViewController? {
-        
-        struct SwiftUIView: View {
-            var body: some View {
-                ZStack {
-                    Color.pink
-                    Button("Hello, SwiftUI!") {
-                        
-                    }
-                    .font(.title)
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                }
-                .navigationTitle("SwiftUI View")
+    @IBAction func loginTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "SignIn")
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true)
             }
-        }
-        
-        return  UIHostingController(coder: coder, rootView: SwiftUIView())
-    }
     
+    
+    @IBAction func createaccountTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "SignUp")
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true)
+            }
 }
 
