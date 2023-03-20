@@ -22,12 +22,6 @@ class SignUpViewController: UIViewController {
     }
     
 
-    @IBAction func backTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "Start")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true)
-            }
     
     @IBAction func createaccountTapped(_ sender: Any) {
         if email.text?.isEmpty == true{

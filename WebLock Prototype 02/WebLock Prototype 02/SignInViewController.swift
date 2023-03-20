@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 import FirebaseAuth
 import Firebase
 
@@ -18,33 +17,19 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-       
-        
+        checkUserInfo()
     }
 
-    @IBAction func backTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "Start")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true)
-            }
-    @IBAction func forgotPasswordTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "Reset")
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true)
-        
-    }
     
     @IBAction func signinTapped(_ sender: Any) {
-        validateFields()
-        }
-       
+       validateFields()
+        
+    }
     func validateFields(){
         if email.text?.isEmpty == true{
             print("no text in email field")
@@ -74,8 +59,7 @@ class SignInViewController: UIViewController {
             let vc = storyboard.instantiateViewController(identifier: "Home Page")
             vc.modalPresentationStyle = .overFullScreen
             self.present(vc, animated: true)
-        }    }
-    
+        }
     }
     
-
+}
