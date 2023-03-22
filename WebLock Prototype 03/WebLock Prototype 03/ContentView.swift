@@ -51,6 +51,13 @@ class AppViewModel: ObservableObject{
         self.signedIn = false
     }
     
+    func resest(email: String){
+        auth.sendPasswordReset(withEmail: email)
+    }
+    
+  
+    
+    
 }
 
 struct ContentView: View {
@@ -64,12 +71,11 @@ struct ContentView: View {
                 VStack{
                
                     Home()
-                    
-                    
                 }
                 }
                 else{
                     SignInView()
+                    
                 }
             }
                 .onAppear{
@@ -86,15 +92,35 @@ struct SignInView: View {
     
     @EnvironmentObject var viewModel: AppViewModel
     
+    init() {
+            //Use this if NavigationBarTitle is with Large Font
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+            //Use this if NavigationBarTitle is with displayMode = .inline
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        }
     var body: some View {
         
+        
+        ZStack{
+            LinearGradient(colors: [
+                
+                Color("BG1"),
+                Color("BG1"),
+                Color("BG2"),
+                Color("BG2"),
+                
+            ], startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
+            
             VStack{
+              
                 VStack{
                     TextField("Email", text: $email)
                         .padding()
-                        .background(Color.gray);                    TextField("Password", text: $password)
+                        .background(Color.white);                    SecureField("Password", text: $password)
                         .padding()
-                        .background(Color.gray)
+                        .background(Color.white)
                     
                     Button {
                         guard !email.isEmpty, !password.isEmpty
@@ -113,22 +139,28 @@ struct SignInView: View {
                             .padding()
                     }
                     
+                    
                     NavigationLink("Create Account", destination: SignUpView())
                         .padding()
                     
+                    
+                    NavigationLink("Forgot Password", destination: ForgotPasswordView())
+                    
                 }
+                
                 .padding()
                 
                 Spacer()
                 
-                
             }
-            .navigationTitle("WebLock")
+           
             
+        }
+        .navigationTitle("WebLock")
+        
         
     }
- 
-    
+        
 }
 
 struct SignUpView: View {
@@ -138,39 +170,50 @@ struct SignUpView: View {
     @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        
+        ZStack{
+            LinearGradient(colors: [
+                
+                Color("BG1"),
+                Color("BG1"),
+                Color("BG2"),
+                Color("BG2"),
+                
+            ], startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
+            
             VStack{
-                VStack{
-                    TextField("Email", text: $email)
-                        .padding()
-                        .background(Color.gray);                    TextField("Password", text: $password)
-                        .padding()
-                        .background(Color.gray)
-                    
-                    Button {
-                        guard !email.isEmpty, !password.isEmpty
-                        else{
-                            return
-                        }
-                        
-                        viewModel.signUp(email: email, password: password)
-                        
-                    } label: {
-                        Text("Create Account")
-                            .foregroundColor(.white)
-                            .frame(width:200, height: 50)
-                            .cornerRadius(8)
-                            .background(.blue)
-                            .padding()
+                
+            VStack{
+                TextField("Email", text: $email)
+                    .padding()
+                    .background(Color.white);                    TextField("Password", text: $password)
+                    .padding()
+                    .background(Color.white)
+                
+                Button {
+                    guard !email.isEmpty, !password.isEmpty
+                    else{
+                        return
                     }
-
                     
+                    viewModel.signUp(email: email, password: password)
+                    
+                } label: {
+                    Text("Create Account")
+                        .foregroundColor(.white)
+                        .frame(width:200, height: 50)
+                        .cornerRadius(8)
+                        .background(.blue)
+                        .padding()
                 }
-                .padding()
-                
-                Spacer()
                 
                 
+            }
+            .padding()
+            
+            Spacer()
+            
+        }
             }
             .navigationTitle("Create Account")
             
@@ -180,6 +223,59 @@ struct SignUpView: View {
     
 }
 
+struct ForgotPasswordView: View {
+    @State var email = ""
+    
+    @EnvironmentObject var viewModel: AppViewModel
+    
+    var body: some View {
+        ZStack{
+            LinearGradient(colors: [
+                
+                Color("BG1"),
+                Color("BG1"),
+                Color("BG2"),
+                Color("BG2"),
+                
+            ], startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
+            
+            VStack{
+            VStack{
+                TextField("Enter Email", text: $email)
+                    .padding()
+                    .background(Color.white);
+                
+                Button {
+                    guard !email.isEmpty
+                    else{
+                        return
+                    }
+                    
+                    viewModel.resest(email: email)
+                    
+                    
+                } label: {
+                    Text("Send Reset Link")
+                        .foregroundColor(.white)
+                        .frame(width:200, height: 50)
+                        .cornerRadius(8)
+                        .background(.blue)
+                        .padding()
+                }
+                
+            }
+            .padding()
+            
+            Spacer()
+        }
+            }
+            .navigationTitle("Forgot Password")
+            
+    }
+ 
+    
+}
 struct Home: View {
     @State var isConnected = false
     @EnvironmentObject var viewModel: AppViewModel
