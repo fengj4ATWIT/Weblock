@@ -9,6 +9,8 @@ import SwiftUI
 import FirebaseCore
 import Firebase
 import FirebaseAuth
+import GoogleSignIn
+import GoogleSignInSwift
 
 class AppViewModel: ObservableObject{
     
@@ -61,9 +63,10 @@ class AppViewModel: ObservableObject{
 }
 
 struct ContentView: View {
-  
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @EnvironmentObject var viewModel: AppViewModel
+    
     
     var body: some View {
         NavigationView{
@@ -89,9 +92,8 @@ struct ContentView: View {
 struct SignInView: View {
     @State var email = ""
     @State var password = ""
-    
     @EnvironmentObject var viewModel: AppViewModel
-    
+   
     init() {
             //Use this if NavigationBarTitle is with Large Font
             UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
@@ -121,6 +123,7 @@ struct SignInView: View {
                         .background(Color.white);                    SecureField("Password", text: $password)
                         .padding()
                         .background(Color.white)
+                        .autocapitalization(.none)
                     
                     Button {
                         guard !email.isEmpty, !password.isEmpty
@@ -146,7 +149,80 @@ struct SignInView: View {
                     
                     NavigationLink("Forgot Password", destination: ForgotPasswordView())
                     
-                }
+                    //GoogleSigninBtn {
+                        
+                    //}
+                    
+                    Button {
+                        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+                        // Create Google Sign In configuration object.
+                        let config = GIDConfiguration(clientID: clientID)
+                        GIDSignIn.sharedInstance.configuration = config
+
+                        // Start the sign in flow!
+                        GIDSignIn.sharedInstance.signIn(withPresenting: getRootViewController()) {  result, error in
+                          guard error == nil else {
+                            // ...
+                              return
+                          }
+
+                          guard let user = result?.user,
+                            let idToken = user.idToken?.tokenString
+                          else {
+                            // ...
+                              return
+                          }
+
+                          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                                         accessToken: user.accessToken.tokenString)
+                            
+                            Auth.auth().signIn(with: credential) { result, error in
+                                guard error == nil else {
+                                   
+                                    return
+                                }
+                              
+                                
+                              // At this point, our user is signed in
+                            }
+                          // ...
+                        }
+                    } label: {
+                        ZStack{
+                            Circle()
+                                .foregroundColor(.white)
+                                .shadow(color: .gray, radius: 4, x: 0, y: 2)
+                            
+                            Image("google")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(8)
+                                
+                        }
+                        
+                    }
+                    .frame(width: 50, height: 70,alignment: .bottomTrailing)
+                    .padding()
+                    
+                    Button {
+                        
+                    } label: {
+                        ZStack{
+                            Circle()
+                                .foregroundColor(.white)
+                                .shadow(color: .gray, radius: 4, x: 0, y: 2)
+                            
+                            Image("apple2")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(8)
+                                
+                        }
+                        
+                    }
+                    .frame(width: 50, height: 50,alignment: .bottomTrailing)
+                    .padding()                }
                 
                 .padding()
                 
@@ -186,7 +262,7 @@ struct SignUpView: View {
             VStack{
                 TextField("Email", text: $email)
                     .padding()
-                    .background(Color.white);                    TextField("Password", text: $password)
+                    .background(Color.white);                    SecureField("Password", text: $password)
                     .padding()
                     .background(Color.white)
                 
@@ -281,152 +357,174 @@ struct Home: View {
     @EnvironmentObject var viewModel: AppViewModel
     @State var currentServer: Server = servers.first!
     @State var changeServer = false
+    @State private var showMenu: Bool = false
     
     var body: some View {
-        
-        VStack{
-            
-            HStack{
-                
-                Button {
-                    viewModel.signOut()
-                } label: {
-                    Text("Sign Out")
-                        .foregroundColor(.blue)
-                    
-                }
-
-                Button {
-                    
-                } label: {
-                    Image(systemName: "circle.grid.cross")
-                        .font(.title2)
-                        .padding(12)
-                        .background(
-                        
-                            RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(.white.opacity(0.25),lineWidth: 1)
-                        )
-                }
-
-                
-                Spacer()
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "slider.horizontal.3")
-                        .font(.title2)
-                        .padding(12)
-                        .background(
-                        
-                            RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(.white.opacity(0.25),lineWidth: 1)
-                        )
-                }
-            }
-            .overlay(
-            
-                
-                Text(getTitle())
-            )
-            .foregroundColor(.white)
-            
-         
-            PowerButton()
-            
-           
+        NavigationView{
             VStack{
-                
-                Label {
-                    
-                    Text(isConnected ? "Connected" : "Not Connected")
-                    
-                } icon: {
-                    Image(systemName: isConnected ? "checkmark.shield" : "shield.slash")
-                }
-                .font(.system(size: 18, weight: .semibold))
-
-                
-                Spacer()
                 
                 HStack{
                     
-                    HStack{
-                        
-                        Image(systemName: "arrow.down.to.line.circle")
-                            .font(.title2)
-                        
-                        VStack(alignment: .leading, spacing: 8) {
+                    Button {
+                            viewModel.signOut()
                             
-                            Text("Download")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.gray)
-                            
-                            Text("\(isConnected ? "60.0" : "0") KB/s")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
+                        } label: {
+                            Image(systemName: "circle.grid.cross")
+                                .font(.title2)
+                                .padding(12)
+                                .background(
+                                    
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .strokeBorder(.white.opacity(0.25),lineWidth: 1)
+                                )
                         }
+                        
+                        
+                        Spacer()
+                      
+                        Button {
+                        self.showMenu.toggle()
+                        } label: {
+                            Image(systemName: "slider.horizontal.3")
+                                .font(.title2)
+                                .padding(12)
+                                .background(
+                                    
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .strokeBorder(.white.opacity(0.25),lineWidth: 1)
+                                )
+                        }
+                        
                     }
+                    .overlay(
+                        
+                        
+                        Text(getTitle())
+                        
+                    )
+                    .foregroundColor(.white)
+                    
+                
+                PowerButton()
+                
+                
+                VStack{
+                    
+                    Label {
+                        
+                        Text(isConnected ? "Connected" : "Not Connected")
+                        
+                    } icon: {
+                        Image(systemName: isConnected ? "checkmark.shield" : "shield.slash")
+                    }
+                    .font(.system(size: 18, weight: .semibold))
+                    
                     
                     Spacer()
                     
                     HStack{
                         
-                        Image(systemName: "arrow.up.to.line.circle")
-                            .font(.title2)
+                        HStack{
+                            
+                            Image(systemName: "arrow.down.to.line.circle")
+                                .font(.title2)
+                            
+                            VStack(alignment: .leading, spacing: 8) {
+                                
+                                Text("Download")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.gray)
+                                
+                                Text("\(isConnected ? "60.0" : "0") KB/s")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            }
+                        }
                         
-                        VStack(alignment: .leading, spacing: 8) {
+                        Spacer()
+                        
+                      
+                        HStack{
                             
-                            Text("Upload")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.gray)
+                            Image(systemName: "arrow.up.to.line.circle")
+                                .font(.title2)
                             
-                            Text("\(isConnected ? "27.5" : "0") KB/s")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
+                            VStack(alignment: .leading, spacing: 8) {
+                                
+                                Text("Upload")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.gray)
+                                
+                                Text("\(isConnected ? "27.5" : "0") KB/s")
+                                    .font(.callout)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
+                    .frame(width: getRect().width - 100)
                 }
-                .frame(width: getRect().width - 100)
+                .animation(.none, value: isConnected)
+                // Max Frame...
+                .frame(height: 120)
+                .padding(.top,getRect().height < 750 ? 20 : 40)
+                
             }
-            .animation(.none, value: isConnected)
-            // Max Frame...
-            .frame(height: 120)
-            .padding(.top,getRect().height < 750 ? 20 : 40)
-           
-        }
-        .padding()
-        .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
-        .background(
-        
-            Background()
-        )
-        
-        .overlay(
-        
-            Rectangle()
-                .fill(.ultraThinMaterial)
-                .opacity(changeServer ? 1 : 0)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    withAnimation{
-                        changeServer.toggle()
-                    }
-                }
-        )
-        .overlay(
-            BottomSheet(),
             
-            alignment: .bottom
-        )
-        .ignoresSafeArea(.container, edges: .bottom)
-      
-        .preferredColorScheme(.dark)
+            
+            .padding()
+            .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
+            .background(
+                
+                Background()
+                
+            )
+            
+            .overlay(
+                
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .opacity(changeServer ? 1 : 0)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation{
+                            changeServer.toggle()
+                        }
+                        
+                    }
+            )
+            .overlay(
+        GeometryReader{ _ in
+            HStack{
+              Spacer()
+                SideMenuView()
+                
+                    .offset(x: showMenu ? 0 : UIScreen.main.bounds.width
+                    
+                )
+            }
+        }
+            .animation(Animation.easeIn.delay(0.05))
+            .onTapGesture {
+                self.showMenu.toggle()
+            }
+            )
+            .overlay(
+                BottomSheet(),
+                
+                alignment: .bottom
+                
+            )
+            .ignoresSafeArea(.container, edges: .bottom)
+            
+            .preferredColorScheme(.dark)
+            
+            
+            
+        }//navigation title
     }
     
 
@@ -745,6 +843,9 @@ struct Home: View {
     }
 }
 
+
+
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
@@ -753,6 +854,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 extension View{
+  
     
     func getRect()->CGRect{
         UIScreen.main.bounds
@@ -769,6 +871,7 @@ extension View{
         
         return safeArea
     }
+    
 }
 
 
