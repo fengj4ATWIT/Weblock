@@ -18,22 +18,23 @@ struct SideMenuView: View {
             
             VStack{
                 ForEach(SideMenuViewModel.allCases, id:  \.self) { option in
-                    NavigationLink(destination: AccountManagmentView(), label:{ OptionsView(viewModel: option)
+                    NavigationLink(destination: SignInView(), label:{ OptionsView(viewModel: option)
                     })
-                  
+                   
                 }
-                Spacer()
+                    Spacer()
+                }
+                
             }
-            
+            .padding(16)
+            .background(Color.black)
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .padding(16)
-        .background(Color.black)
-        .edgesIgnoringSafeArea(.bottom)
     }
-}
+    
+    struct SideMenuView_Previews: PreviewProvider {
+        static var previews: some View {
+            SideMenuView()
+        }
+    }
 
-struct SideMenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        SideMenuView()
-    }
-}

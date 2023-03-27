@@ -507,6 +507,7 @@ struct Home: View {
                 )
             }
         }
+            .background(Color.black.opacity(showMenu ? 0.5 : 0))
             .animation(Animation.easeIn.delay(0.05))
             .onTapGesture {
                 self.showMenu.toggle()
