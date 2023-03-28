@@ -369,8 +369,8 @@ struct Home: View {
                             viewModel.signOut()
                             
                         } label: {
-                            Image(systemName: "circle.grid.cross")
-                                .font(.title2)
+                            Image(systemName: "questionmark.app")
+                                .font(.title)
                                 .padding(12)
                                 .background(
                                     
