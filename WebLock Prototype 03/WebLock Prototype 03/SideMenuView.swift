@@ -22,6 +22,7 @@ struct SideMenuView: View {
                     })
                    
                 }
+                
                     Spacer()
                 }
                 

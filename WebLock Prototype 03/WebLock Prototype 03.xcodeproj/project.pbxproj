@@ -11,6 +11,8 @@
 		48878A2329D1CAFC00A16A32 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48878A2229D1CAFC00A16A32 /* OptionsView.swift */; };
 		48878A2529D1D1A800A16A32 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48878A2429D1D1A800A16A32 /* SideMenuViewModel.swift */; };
 		48878A2729D1DC7E00A16A32 /* LinkVPNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48878A2629D1DC7E00A16A32 /* LinkVPNView.swift */; };
+		48878A2929D5246100A16A32 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48878A2829D5246100A16A32 /* SettingsView.swift */; };
+		48878A2B29D5C02500A16A32 /* AppleSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48878A2A29D5C02500A16A32 /* AppleSignInViewModel.swift */; };
 		4896F26729C696A000ED00D6 /* WebLock_Prototype_03App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4896F26629C696A000ED00D6 /* WebLock_Prototype_03App.swift */; };
 		4896F26929C696A000ED00D6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4896F26829C696A000ED00D6 /* ContentView.swift */; };
 		4896F26B29C696A600ED00D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4896F26A29C696A600ED00D6 /* Assets.xcassets */; };
@@ -75,6 +77,9 @@
 		48878A2229D1CAFC00A16A32 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		48878A2429D1D1A800A16A32 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		48878A2629D1DC7E00A16A32 /* LinkVPNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkVPNView.swift; sourceTree = "<group>"; };
+		48878A2829D5246100A16A32 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		48878A2A29D5C02500A16A32 /* AppleSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInViewModel.swift; sourceTree = "<group>"; };
+		48878A2C29D5C73C00A16A32 /* WebLock Prototype 03.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WebLock Prototype 03.entitlements"; sourceTree = "<group>"; };
 		4896F26329C696A000ED00D6 /* WebLock Prototype 03.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WebLock Prototype 03.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4896F26629C696A000ED00D6 /* WebLock_Prototype_03App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLock_Prototype_03App.swift; sourceTree = "<group>"; };
 		4896F26829C696A000ED00D6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -169,11 +174,14 @@
 		4896F26529C696A000ED00D6 /* WebLock Prototype 03 */ = {
 			isa = PBXGroup;
 			children = (
+				48878A2C29D5C73C00A16A32 /* WebLock Prototype 03.entitlements */,
 				48A01CE729CC117A00018CAB /* WebLock-Prototype-03-Info.plist */,
 				4896F26629C696A000ED00D6 /* WebLock_Prototype_03App.swift */,
 				48A01CE829CC189D00018CAB /* +View.swift */,
 				4896F26A29C696A600ED00D6 /* Assets.xcassets */,
 				4896F26829C696A000ED00D6 /* ContentView.swift */,
+				48878A2A29D5C02500A16A32 /* AppleSignInViewModel.swift */,
+				48878A2829D5246100A16A32 /* SettingsView.swift */,
 				48878A2229D1CAFC00A16A32 /* OptionsView.swift */,
 				48878A1E29D1C94A00A16A32 /* AccountManagmentView.swift */,
 				48878A2629D1DC7E00A16A32 /* LinkVPNView.swift */,
@@ -382,10 +390,12 @@
 				48878A2329D1CAFC00A16A32 /* OptionsView.swift in Sources */,
 				48878A2529D1D1A800A16A32 /* SideMenuViewModel.swift in Sources */,
 				48878A2729D1DC7E00A16A32 /* LinkVPNView.swift in Sources */,
+				48878A2929D5246100A16A32 /* SettingsView.swift in Sources */,
 				4896F26929C696A000ED00D6 /* ContentView.swift in Sources */,
 				48A01CEB29CEEDFA00018CAB /* SideMenuView.swift in Sources */,
 				4896F26729C696A000ED00D6 /* WebLock_Prototype_03App.swift in Sources */,
 				48A01CDF29CBA71000018CAB /* Servers.swift in Sources */,
+				48878A2B29D5C02500A16A32 /* AppleSignInViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +551,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WebLock Prototype 03/WebLock Prototype 03.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebLock Prototype 03/Preview Content\"";
@@ -570,6 +581,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WebLock Prototype 03/WebLock Prototype 03.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebLock Prototype 03/Preview Content\"";

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import GoogleSignInSwift
+import _AuthenticationServices_SwiftUI
 
 class AppViewModel: ObservableObject{
     
@@ -49,6 +50,8 @@ class AppViewModel: ObservableObject{
     }
     
     func signOut(){
+        GIDSignIn.sharedInstance.signOut()
+        
        try? auth.signOut()
         self.signedIn = false
     }
@@ -66,7 +69,7 @@ struct ContentView: View {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @EnvironmentObject var viewModel: AppViewModel
-    
+    @AppStorage("log-status") var log_status = false
     
     var body: some View {
         NavigationView{
@@ -84,6 +87,7 @@ struct ContentView: View {
                 .onAppear{
                     viewModel.signedIn = viewModel.isSignedIn
                 }
+     
         }
     
     
@@ -93,6 +97,7 @@ struct SignInView: View {
     @State var email = ""
     @State var password = ""
     @EnvironmentObject var viewModel: AppViewModel
+    @StateObject var loginData = AppleSignInViewModel()
    
     init() {
             //Use this if NavigationBarTitle is with Large Font
@@ -150,43 +155,43 @@ struct SignInView: View {
                     NavigationLink("Forgot Password", destination: ForgotPasswordView())
                     
                     //GoogleSigninBtn {
-                        
+                    
                     //}
                     
                     Button {
                         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
+                        
                         // Create Google Sign In configuration object.
                         let config = GIDConfiguration(clientID: clientID)
                         GIDSignIn.sharedInstance.configuration = config
-
+                        
                         // Start the sign in flow!
                         GIDSignIn.sharedInstance.signIn(withPresenting: getRootViewController()) {  result, error in
-                          guard error == nil else {
-                            // ...
-                              return
-                          }
-
-                          guard let user = result?.user,
-                            let idToken = user.idToken?.tokenString
-                          else {
-                            // ...
-                              return
-                          }
-
-                          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                                         accessToken: user.accessToken.tokenString)
+                            guard error == nil else {
+                                // ...
+                                return
+                            }
+                            
+                            guard let user = result?.user,
+                                  let idToken = user.idToken?.tokenString
+                            else {
+                                // ...
+                                return
+                            }
+                            
+                            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                                           accessToken: user.accessToken.tokenString)
                             
                             Auth.auth().signIn(with: credential) { result, error in
                                 guard error == nil else {
-                                   
+                                    
                                     return
                                 }
-                              
+                                viewModel.signedIn
                                 
-                              // At this point, our user is signed in
+                                // At this point, our user is signed in
                             }
-                          // ...
+                            // ...
                         }
                     } label: {
                         ZStack{
@@ -198,46 +203,60 @@ struct SignInView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .padding(8)
-                                
+                            
                         }
                         
                     }
                     .frame(width: 50, height: 70,alignment: .bottomTrailing)
                     .padding()
-                    
-                    Button {
+                    .padding()
+                    SignInWithAppleButton { (request) in
                         
-                    } label: {
-                        ZStack{
-                            Circle()
-                                .foregroundColor(.white)
-                                .shadow(color: .gray, radius: 4, x: 0, y: 2)
-                            
-                            Image("apple2")
-                                .resizable()
-                                .scaledToFit()
-                                .padding(8)
-                                
+                        //getting error or success
+                        loginData.nonce = randomNonceString()
+                        request.requestedScopes = [.email,.fullName]
+                        request.nonce = sha256(loginData.nonce)
+                        
+                    } onCompletion: { (result) in
+                        switch result{
+                        case.success(let user):
+                            print("Success")
+                            //do login with firebase
+                            guard let credential = user.credential as?
+                                    ASAuthorizationAppleIDCredential else{
+                                        print("error with firebase")
+                                        return
+                                    }
+                            loginData.authenticate(credential: credential)
+                        case.failure(let error):
+                            print(error.localizedDescription)
                         }
                         
                     }
-                    .frame(width: 50, height: 50,alignment: .bottomTrailing)
-                    .padding()                }
+                    .signInWithAppleButtonStyle(.white)
+                    .frame(height:55)
+                    .clipShape(Capsule())
+                    .padding(.horizontal,40)
+                    
+                }
+                    
+                  
+                
+            }
                 
                 .padding()
                 
                 Spacer()
                 
             }
-           
-            
-        }
         .navigationTitle("WebLock")
+        }
+        
         
         
     }
         
-}
+
 
 struct SignUpView: View {
     @State var email = ""
@@ -358,18 +377,17 @@ struct Home: View {
     @State var currentServer: Server = servers.first!
     @State var changeServer = false
     @State private var showMenu: Bool = false
-    
+    @AppStorage("log-status") var log_status = false
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack{
                 
                 HStack{
-                    
+                   
                     Button {
-                            viewModel.signOut()
-                            
-                        } label: {
-                            Image(systemName: "questionmark.app")
+                        viewModel.signOut()                    }
+                  label: {
+                            Image(systemName: "arrow.left.square")
                                 .font(.title)
                                 .padding(12)
                                 .background(
@@ -378,12 +396,29 @@ struct Home: View {
                                         .strokeBorder(.white.opacity(0.25),lineWidth: 1)
                                 )
                         }
-                        
-                        
+                  
+                    
                         Spacer()
                       
-                        Button {
-                        self.showMenu.toggle()
+                        Menu {
+                           NavigationLink("Account Management"){
+                               
+                               AccountManagmentView()
+                            }
+                       
+                            NavigationLink("Link VPN"){
+                                LinkVPNView()
+                            }
+                        
+                           
+                            Button {
+                                
+                            } label: {
+                                Text("FireWall Configuration")
+                                                            }
+                            
+
+                        //self.showMenu.toggle()
                         } label: {
                             Image(systemName: "slider.horizontal.3")
                                 .font(.title2)
@@ -396,8 +431,9 @@ struct Home: View {
                         }
                         
                     }
+              
                     .overlay(
-                        
+                       
                         
                         Text(getTitle())
                         
@@ -526,6 +562,7 @@ struct Home: View {
             
             
         }//navigation title
+        
     }
     
 

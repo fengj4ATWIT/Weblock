@@ -35,6 +35,9 @@ struct AccountManagmentView: View {
             .ignoresSafeArea()
             
             VStack{
+                Text("Loged in as\n\(Auth.auth().currentUser!.email!)")
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
                 VStack{
                     TextField("Email", text: $email)
                         .padding()
@@ -96,6 +99,8 @@ struct AccountManagmentView: View {
     struct AccountManagmentView_Previews: PreviewProvider {
         static var previews: some View {
             AccountManagmentView()
+            .environmentObject(AppViewModel())
+            
         }
     }
 }
