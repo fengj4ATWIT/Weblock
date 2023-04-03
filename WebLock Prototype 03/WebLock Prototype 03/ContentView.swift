@@ -18,7 +18,7 @@ class AppViewModel: ObservableObject{
     let auth = Auth.auth()
     
     @Published var signedIn = false
-    
+    @Published private var alertIsPresented = false
     var isSignedIn : Bool{
         return auth.currentUser != nil
     }
@@ -27,11 +27,13 @@ class AppViewModel: ObservableObject{
         auth.signIn(withEmail: email, password: password) { [weak self]result , error in
             guard result != nil, error == nil
             else{
+                self?.alertIsPresented = true
                 return
             }
             DispatchQueue.main.async{
                 //Success
                 self?.signedIn = true
+                
             }
         }
     }
@@ -110,6 +112,7 @@ struct ContentView: View {
 
 struct SignInView: View {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @State private var alertIsPresented = false
     @State var email = ""
     @State var password = ""
     @EnvironmentObject var viewModel: AppViewModel
@@ -154,25 +157,29 @@ struct SignInView: View {
                         .background(Color.white)
                        
                     
-                    
-                    Button {
+                    Button("Sign In"){
                         guard !email.isEmpty, !password.isEmpty
                         else{
+                            self.alertIsPresented = true
                             return
                         }
-                        
+                            
                         viewModel.signIn(email: email, password: password)
                         
-                    } label: {
-                        Text("Sign In")
+                    }
+                       
                             .foregroundColor(.white)
                             .frame(width:200, height: 50)
                             .cornerRadius(8)
                             .background(.blue)
                             .padding()
-                    }
+                            .alert(isPresented: $alertIsPresented){
+                                Alert(title: Text("Error"), message: Text("Enter email and password"), dismissButton: .default(Text("OK")))
+                            }
                     
-                    
+                   
+                        
+                        
                     NavigationLink("Create Account", destination: SignUpView())
                         .padding()
                     
@@ -242,7 +249,7 @@ struct SignInView: View {
                                 .resizable()
                                 .frame(width: 28,height: 28)
                             
-                            Text("Create Account")
+                            Text("Sign In with Google")
                                 .font(.title3)
                                 .fontWeight(.medium)
                                 .kerning(1.1)
@@ -258,7 +265,7 @@ struct SignInView: View {
                                 .strokeBorder(Color.white)
                                 .background(Color.white)
                                 .cornerRadius(90)
-                                .frame(height: 55)
+                                .frame(width:280,height: 55)
                             
                         )
                         
@@ -444,7 +451,9 @@ struct Home: View {
                 HStack{
                    
                     Button {
-                        viewModel.signOut()                    }
+                        viewModel.signOut()
+                        
+                    }
                   label: {
                             Image(systemName: "arrow.left.square")
                                 .font(.title)
