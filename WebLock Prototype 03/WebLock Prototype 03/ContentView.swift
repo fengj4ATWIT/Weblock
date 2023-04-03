@@ -51,14 +51,16 @@ class AppViewModel: ObservableObject{
     
     func signOut(){
         GIDSignIn.sharedInstance.signOut()
-        
-       try? auth.signOut()
-        self.signedIn = false
+        try? auth.signOut()
+       
+    
+       self.signedIn = false
     }
     
     func resest(email: String){
         auth.sendPasswordReset(withEmail: email)
     }
+    
     
   
     
@@ -67,26 +69,39 @@ class AppViewModel: ObservableObject{
 
 struct ContentView: View {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+    @State var user = Auth.auth().currentUser
     @EnvironmentObject var viewModel: AppViewModel
-    @AppStorage("log-status") var log_status = false
+    @AppStorage("log_Status") var log_Status = false
     
     var body: some View {
         NavigationView{
-            if viewModel.signedIn{
+            
+            
+            
+            if  viewModel.signedIn {
                 VStack{
                
                     Home()
                 }
+                if log_Status == true{
+                    VStack{
+                        Home()
+                    }
                 }
+                
+            }
                 else{
-                    SignInView()
+                    VStack{
+                        SignInView()
+                    }
                     
                 }
+            
             }
                 .onAppear{
                     viewModel.signedIn = viewModel.isSignedIn
                 }
+       
      
         }
     
@@ -94,10 +109,12 @@ struct ContentView: View {
 }
 
 struct SignInView: View {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @State var email = ""
     @State var password = ""
     @EnvironmentObject var viewModel: AppViewModel
     @StateObject var loginData = AppleSignInViewModel()
+    @AppStorage("log_Status") var log_Status = false
    
     init() {
             //Use this if NavigationBarTitle is with Large Font
@@ -124,11 +141,19 @@ struct SignInView: View {
               
                 VStack{
                     TextField("Email", text: $email)
-                        .padding()
-                        .background(Color.white);                    SecureField("Password", text: $password)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
                         .padding()
                         .background(Color.white)
+                        
+                    
+                    SecureField("Password", text: $password)
                         .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .padding()
+                        .background(Color.white)
+                       
+                    
                     
                     Button {
                         guard !email.isEmpty, !password.isEmpty
@@ -155,61 +180,93 @@ struct SignInView: View {
                     NavigationLink("Forgot Password", destination: ForgotPasswordView())
                     
                     //GoogleSigninBtn {
-                    
-                    //}
+                   // GIDSignIn.sharedInstance.signIn(withPresenting: getRootViewController()) {  result, error in                    //}
                     
                     Button {
                         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-                        
+
                         // Create Google Sign In configuration object.
                         let config = GIDConfiguration(clientID: clientID)
                         GIDSignIn.sharedInstance.configuration = config
-                        
+
                         // Start the sign in flow!
                         GIDSignIn.sharedInstance.signIn(withPresenting: getRootViewController()) {  result, error in
-                            guard error == nil else {
-                                // ...
-                                return
-                            }
-                            
-                            guard let user = result?.user,
-                                  let idToken = user.idToken?.tokenString
-                            else {
-                                // ...
-                                return
-                            }
-                            
-                            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                                           accessToken: user.accessToken.tokenString)
-                            
+                          guard error == nil else {
+                            // ...
+                              return
+                          }
+
+                          guard let user = result?.user,
+                            let idToken = user.idToken?.tokenString
+                          else {
+                            // ...
+                              return
+                          }
+
+                          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                                         accessToken: user.accessToken.tokenString)
+
                             Auth.auth().signIn(with: credential) { result, error in
-                                guard error == nil else {
-                                    
+                                if error != nil {
+                                    print("error")
                                     return
                                 }
-                                viewModel.signedIn
                                 
-                                // At this point, our user is signed in
+                                viewModel.signedIn = true
+                                    
+                        }
+                            
+                                //Success
+                               // viewModel.signedIn = true
+                            
+                            // At this point, our user is signed in
+                            
+                               //display user
+                                //guard let user = result?.user else{
+                                   // return
+                                //}
+                               // print(user.displayName ?? "Success!")
+                                
+                                //updating user as logged in
+                            withAnimation {
+                                log_Status = true
                             }
+                           
+                          
+                            
                             // ...
                         }
                     } label: {
-                        ZStack{
-                            Circle()
-                                .foregroundColor(.white)
-                                .shadow(color: .gray, radius: 4, x: 0, y: 2)
-                            
+                        HStack(spacing: 15){
                             Image("google")
                                 .resizable()
-                                .scaledToFit()
-                                .padding(8)
+                                .frame(width: 28,height: 28)
+                            
+                            Text("Create Account")
+                                .font(.title3)
+                                .fontWeight(.medium)
+                                .kerning(1.1)
+                                .foregroundColor(.black)
                             
                         }
+                        .foregroundColor(Color.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        //
+                        .background(
+                            Capsule()
+                                .strokeBorder(Color.white)
+                                .background(Color.white)
+                                .cornerRadius(90)
+                                .frame(height: 55)
+                            
+                        )
                         
                     }
-                    .frame(width: 50, height: 70,alignment: .bottomTrailing)
+                   
                     .padding()
                     .padding()
+                    
                     SignInWithAppleButton { (request) in
                         
                         //getting error or success
@@ -227,6 +284,7 @@ struct SignInView: View {
                                         print("error with firebase")
                                         return
                                     }
+                            viewModel.signedIn = true
                             loginData.authenticate(credential: credential)
                         case.failure(let error):
                             print(error.localizedDescription)
@@ -256,6 +314,7 @@ struct SignInView: View {
         
     }
         
+
 
 
 struct SignUpView: View {
@@ -401,16 +460,15 @@ struct Home: View {
                         Spacer()
                       
                         Menu {
-                           NavigationLink("Account Management"){
-                               
-                               AccountManagmentView()
-                            }
+                          
                        
                             NavigationLink("Link VPN"){
                                 LinkVPNView()
                             }
                         
-                           
+                            NavigationLink("Account Management"){
+                                AccountView()
+                            }
                             Button {
                                 
                             } label: {
@@ -536,7 +594,7 @@ struct Home: View {
         GeometryReader{ _ in
             HStack{
               Spacer()
-                SideMenuView()
+                //SideMenuView()
                 
                     .offset(x: showMenu ? 0 : UIScreen.main.bounds.width
                     
@@ -882,7 +940,105 @@ struct Home: View {
 }
 
 
-
+struct AccountManagmentView: View {
+    @State var email = ""
+    @State var password = ""
+    @EnvironmentObject var viewModel: AppViewModel
+    init() {
+        //Use this if NavigationBarTitle is with Large Font
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        //Use this if NavigationBarTitle is with displayMode = .inline
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    var body: some View {
+        NavigationView{
+            ZStack{
+                LinearGradient(colors: [
+                    
+                    Color("BG1"),
+                    Color("BG1"),
+                    Color("BG2"),
+                    Color("BG2"),
+                    
+                ], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+                
+                
+                
+                VStack{
+                    
+                    
+                    TextField("Email", text: $email)
+                        .padding()
+                        .background(Color.white)
+                    
+                    
+                    Button {
+                        Auth.auth().currentUser?.updateEmail(to: email) { error in
+                            if error != nil {
+                                print("error")
+                            }else{
+                                print("Changed")
+                                
+                            }
+                            
+                        }
+                        
+                    } label: {
+                        Text("Change Email")
+                            .foregroundColor(.white)
+                            .frame(width:200, height: 50)
+                            .cornerRadius(8)
+                            .background(.blue)
+                            .padding()
+                    }
+                    
+                    
+                    TextField("Password", text: $password)
+                        .padding()
+                        .background(Color.white)
+                        .autocapitalization(.none)
+                    Button {
+                        Auth.auth().currentUser?.updatePassword(to: password) { error in
+                            
+                            // ...
+                        }
+                        
+                    } label: {
+                        Text("Change Password")
+                            .foregroundColor(.white)
+                            .frame(width:200, height: 50)
+                            .cornerRadius(8)
+                            .background(.blue)
+                            .padding()
+                    }
+                    Spacer()
+                    Button {
+                        
+                    } label: {
+                        Text("Delete Account")
+                            .foregroundColor(.white)
+                            .frame(width:200, height: 50)
+                            .cornerRadius(8)
+                            .background(.blue)
+                            .padding()
+                    }
+                    
+                }
+                .padding()
+                
+                
+                
+                
+            }
+            .navigationTitle("Account Management")
+            
+        }
+        .navigationTitle("Account Management")
+    }
+}
+    
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

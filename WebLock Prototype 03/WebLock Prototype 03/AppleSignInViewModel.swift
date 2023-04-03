@@ -13,7 +13,7 @@ import Firebase
 class AppleSignInViewModel: ObservableObject{
     
     @Published var nonce = ""
-    @AppStorage("log-status") var log_Status = false
+    @AppStorage("log-status") var log_status = false
     
     func authenticate(credential: ASAuthorizationAppleIDCredential){
         //getting token
@@ -39,7 +39,7 @@ class AppleSignInViewModel: ObservableObject{
             
             //directing user to home page
             withAnimation(.easeInOut){
-                log_Status = true
+                log_status = true
             }
         }
     }
