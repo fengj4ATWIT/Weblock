@@ -17,19 +17,36 @@ struct AccountManagementView: View {
     @State var email = ""
     @State var password = ""
     
+    init() {
+            //Use this if NavigationBarTitle is with Large Font
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+            //Use this if NavigationBarTitle is with displayMode = .inline
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        }
+    
     var body: some View {
         NavigationView{
             ZStack{
-               
+                LinearGradient(colors: [
+                    
+                    Color("BG1"),
+                    Color("BG1"),
+                    Color("BG2"),
+                    Color("BG2"),
+                    
+                ], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
                 
                 VStack{
                     
-                    TextField("Email", text: $email)
+                    TextField("Enter New Email", text: $email)
+                        .padding()
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
+                        .background(Color.white)
                         .padding()
-                        .padding()
-                        .background(Color.black)
+                        
                     
                     
                     Button("Change Email") {
@@ -49,10 +66,12 @@ struct AccountManagementView: View {
                     
                     
                     TextField("Enter New Password", text: $password)
+                        .padding()
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
+                        .background(Color.white)
                         .padding()
-                        .background(Color.black)
+                        
                     
                     Button("Change Password") {
                         Auth.auth().currentUser?.updatePassword(to: password) { error in
