@@ -50,6 +50,8 @@
 		488B454B29DDA99C00254E10 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 488B454A29DDA99C00254E10 /* FirebaseStorageCombine-Community */; };
 		488B455029DDAEDF00254E10 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 488B454F29DDAEDF00254E10 /* GoogleSignIn */; };
 		488B455229DDAEE600254E10 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 488B455129DDAEE600254E10 /* GoogleSignInSwift */; };
+		488B455429DE71E700254E10 /* Servers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488B455329DE71E500254E10 /* Servers.swift */; };
+		488B455629DE72FB00254E10 /* LinkVPNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488B455529DE72F900254E10 /* LinkVPNView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		488B451129DD52D900254E10 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		488B451329DDA8DE00254E10 /* +View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "+View.swift"; sourceTree = "<group>"; };
 		488B454D29DDAC6300254E10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		488B455329DE71E500254E10 /* Servers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Servers.swift; sourceTree = "<group>"; };
+		488B455529DE72F900254E10 /* LinkVPNView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkVPNView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,11 +176,13 @@
 				488B44DD29DD4F8100254E10 /* WebLockApp.swift */,
 				488B44DF29DD4F8100254E10 /* ContentView.swift */,
 				488B450B29DD522C00254E10 /* AccountManagementView.swift */,
+				488B455529DE72F900254E10 /* LinkVPNView.swift */,
 				488B450D29DD529A00254E10 /* ForgotPasswordView.swift */,
 				488B450F29DD52C600254E10 /* SignInView.swift */,
 				488B451129DD52D900254E10 /* SignUpView.swift */,
 				488B450729DD500100254E10 /* Home.swift */,
 				488B451329DDA8DE00254E10 /* +View.swift */,
+				488B455329DE71E500254E10 /* Servers.swift */,
 				488B44E129DD4F8300254E10 /* Assets.xcassets */,
 				488B450929DD50F800254E10 /* GoogleService-Info.plist */,
 				488B44E329DD4F8300254E10 /* Preview Content */,
@@ -387,9 +393,11 @@
 				488B450829DD500100254E10 /* Home.swift in Sources */,
 				488B451229DD52D900254E10 /* SignUpView.swift in Sources */,
 				488B451429DDA8DE00254E10 /* +View.swift in Sources */,
+				488B455629DE72FB00254E10 /* LinkVPNView.swift in Sources */,
 				488B44DE29DD4F8100254E10 /* WebLockApp.swift in Sources */,
 				488B450E29DD529A00254E10 /* ForgotPasswordView.swift in Sources */,
 				488B450C29DD522C00254E10 /* AccountManagementView.swift in Sources */,
+				488B455429DE71E700254E10 /* Servers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
