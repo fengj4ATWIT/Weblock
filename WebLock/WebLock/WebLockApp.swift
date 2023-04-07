@@ -10,6 +10,7 @@ import FirebaseCore
 import GoogleSignIn
 import GoogleSignInSwift
 
+
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool{
         FirebaseApp.configure()

@@ -89,10 +89,10 @@ struct SignInView: View {
         ZStack{
             LinearGradient(colors: [
                 
-                Color("BG1"),
-                Color("BG1"),
-                Color("BG2"),
-                Color("BG2"),
+                Color("Color 2"),
+                Color("Color 2"),
+                Color("Color 3"),
+                Color("Color 3"),
                 
             ], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
@@ -101,10 +101,11 @@ struct SignInView: View {
               Image("AppIcon")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 150, height: 150)
+                    .frame(width: 320, height: 200)
                     .padding()
                 VStack{
                     TextField("Email", text: $email)
+                        .frame(width: 300, height: 20)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .padding()
@@ -112,6 +113,7 @@ struct SignInView: View {
                         
                     
                     SecureField("Password", text: $password)
+                        .frame(width: 300, height: 20)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .padding()
@@ -141,11 +143,12 @@ struct SignInView: View {
                     
                    
                     NavigationLink("Create Account", destination: SignUpView())
+                        .foregroundColor(Color.blue)
                         .padding()
                     
                     
                     NavigationLink("Forgot Password", destination: ForgotPasswordView())
-                    
+                        .foregroundColor(Color.pink)
               
                     
                     Button {
@@ -212,7 +215,7 @@ struct SignInView: View {
                     }
                    
                     .padding()
-                    .padding()
+                   
                     
                     SignInWithAppleButton(.signIn) { request in
                         request.requestedScopes = [.email, .fullName]
@@ -248,7 +251,7 @@ struct SignInView: View {
                         
                     }
                     .signInWithAppleButtonStyle(.white)
-                    .frame(height:55)
+                    .frame(width: 280, height:55)
                     .clipShape(Capsule())
                     .padding(.horizontal,40)
 
@@ -257,7 +260,7 @@ struct SignInView: View {
                     
             }
                 
-                .padding()
+                
                 
                 Spacer()
                 

@@ -52,6 +52,7 @@
 		488B455229DDAEE600254E10 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 488B455129DDAEE600254E10 /* GoogleSignInSwift */; };
 		488B455429DE71E700254E10 /* Servers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488B455329DE71E500254E10 /* Servers.swift */; };
 		488B455629DE72FB00254E10 /* LinkVPNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488B455529DE72F900254E10 /* LinkVPNView.swift */; };
+		48913BDB29DFB90D00D7BDD3 /* FirewallConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48913BDA29DFB90D00D7BDD3 /* FirewallConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		488B454D29DDAC6300254E10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		488B455329DE71E500254E10 /* Servers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Servers.swift; sourceTree = "<group>"; };
 		488B455529DE72F900254E10 /* LinkVPNView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkVPNView.swift; sourceTree = "<group>"; };
+		48913BDA29DFB90D00D7BDD3 /* FirewallConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirewallConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				488B455529DE72F900254E10 /* LinkVPNView.swift */,
 				488B450D29DD529A00254E10 /* ForgotPasswordView.swift */,
 				488B450F29DD52C600254E10 /* SignInView.swift */,
+				48913BDA29DFB90D00D7BDD3 /* FirewallConfig.swift */,
 				488B451129DD52D900254E10 /* SignUpView.swift */,
 				488B450729DD500100254E10 /* Home.swift */,
 				488B451329DDA8DE00254E10 /* +View.swift */,
@@ -396,6 +399,7 @@
 				488B455629DE72FB00254E10 /* LinkVPNView.swift in Sources */,
 				488B44DE29DD4F8100254E10 /* WebLockApp.swift in Sources */,
 				488B450E29DD529A00254E10 /* ForgotPasswordView.swift in Sources */,
+				48913BDB29DFB90D00D7BDD3 /* FirewallConfig.swift in Sources */,
 				488B450C29DD522C00254E10 /* AccountManagementView.swift in Sources */,
 				488B455429DE71E700254E10 /* Servers.swift in Sources */,
 			);
@@ -556,6 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebLock/Preview Content\"";
+				DEVELOPMENT_TEAM = K889CZ86BA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebLock/Info.plist;
@@ -585,6 +590,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WebLock/Preview Content\"";
+				DEVELOPMENT_TEAM = K889CZ86BA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebLock/Info.plist;

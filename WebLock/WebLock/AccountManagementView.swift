@@ -30,10 +30,10 @@ struct AccountManagementView: View {
             ZStack{
                 LinearGradient(colors: [
                     
-                    Color("BG1"),
-                    Color("BG1"),
-                    Color("BG2"),
-                    Color("BG2"),
+                    Color("Color 2"),
+                    Color("Color 2"),
+                    Color("Color 3"),
+                    Color("Color 3"),
                     
                 ], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
@@ -41,10 +41,12 @@ struct AccountManagementView: View {
                 VStack{
                     
                     TextField("Enter New Email", text: $email)
+                        .frame(width: 320, height: 20)
                         .padding()
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .background(Color.white)
+                        .foregroundColor(Color.black)
                         .padding()
                         
                     
@@ -59,18 +61,29 @@ struct AccountManagementView: View {
                         }
                         alertIsPresented = true
                     }
+                    .foregroundColor(Color.white)
+                    .frame(width:200, height: 50)
+                    .cornerRadius(8)
+                    .background(.blue)
+                    .padding()
                     .alert(isPresented: $alertIsPresented){
                         Alert(title: Text("Success"), message: Text("Email Changed"), dismissButton: .default(Text("OK")))
                     }
 
                     
+                    VStack{
+                        TextField("Enter New Password", text: $password)
+                            .frame(width: 320, height: 20)
+                            .padding()
+                            .autocapitalization(.none)
+                            .disableAutocorrection(true)
+                            .background(Color.white)
+                            .foregroundColor(Color.black)
+                            .padding()
+                            
+                        
+                    }
                     
-                    TextField("Enter New Password", text: $password)
-                        .padding()
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
-                        .background(Color.white)
-                        .padding()
                         
                     
                     Button("Change Password") {
@@ -84,6 +97,11 @@ struct AccountManagementView: View {
                         alertIsPresented2 = true
                         
                     }
+                    .foregroundColor(Color.white)
+                    .frame(width:200, height: 50)
+                    .cornerRadius(8)
+                    .background(.blue)
+                    .padding()
                     .alert(isPresented: $alertIsPresented2){
                         Alert(title: Text("Success"), message: Text("Password Changed"), dismissButton: .default(Text("OK")))
                     }

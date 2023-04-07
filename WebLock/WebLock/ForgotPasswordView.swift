@@ -26,10 +26,10 @@ struct ForgotPasswordView: View {
         ZStack{
             LinearGradient(colors: [
                 
-                Color("BG1"),
-                Color("BG1"),
-                Color("BG2"),
-                Color("BG2"),
+                Color("Color 2"),
+                Color("Color 2"),
+                Color("Color 3"),
+                Color("Color 3"),
                 
             ], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
@@ -37,6 +37,8 @@ struct ForgotPasswordView: View {
             VStack{
             VStack{
                 TextField("Enter Email", text: $email)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .padding()
                     .background(Color.white);
                 

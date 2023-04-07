@@ -56,11 +56,11 @@ struct Home: View {
                             NavigationLink("Account Management"){
                                 AccountManagementView()
                             }
-                            Button {
-                                
-                            } label: {
-                                Text("FireWall Configuration")
+                            
+                            NavigationLink("FireWall Configuration"){
+                                FirewallConfig()
                             }
+                            
                             
                             
                         } label: {
@@ -105,20 +105,20 @@ struct Home: View {
                             
                             HStack{
                                 
-                                Image(systemName: "arrow.down.to.line.circle")
-                                    .font(.title2)
+                                //Image(systemName: "arrow.down.to.line.circle")
+                                    //.font(.title2)
                                 
                                 VStack(alignment: .leading, spacing: 8) {
                                     
-                                    Text("Download")
-                                        .font(.callout)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
+                                    //Text("Download")
+                                        //.font(.callout)
+                                        //.fontWeight(.semibold)
+                                        //.foregroundColor(.gray)
                                     
-                                    Text("\(isConnected ? "60.0" : "0") KB/s")
-                                        .font(.callout)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.white)
+                                    //Text("\(isConnected ? "60.0" : "0") KB/s")
+                                        //.font(.callout)
+                                       // .fontWeight(.semibold)
+                                        //.foregroundColor(.white)
                                 }
                             }
                             
@@ -127,20 +127,20 @@ struct Home: View {
                             
                             HStack{
                                 
-                                Image(systemName: "arrow.up.to.line.circle")
-                                    .font(.title2)
+                                //Image(systemName: "arrow.up.to.line.circle")
+                                    //.font(.title2)
                                 
                                 VStack(alignment: .leading, spacing: 8) {
                                     
-                                    Text("Upload")
-                                        .font(.callout)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.gray)
+                                    //Text("Upload")
+                                        //.font(.callout)
+                                        //.fontWeight(.semibold)
+                                        //.foregroundColor(.gray)
                                     
-                                    Text("\(isConnected ? "27.5" : "0") KB/s")
-                                        .font(.callout)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.white)
+                                    //Text("\(isConnected ? "27.5" : "0") KB/s")
+                                        //.font(.callout)
+                                        //.fontWeight(.semibold)
+                                        //.foregroundColor(.white)
                                 }
                             }
                         }
@@ -352,10 +352,10 @@ struct Home: View {
                 
                 LinearGradient(colors: [
                     
-                    Color("BG1"),
-                    Color("BG1"),
-                    Color("BG2"),
-                    Color("BG2"),
+                    Color("Color 2"),
+                    Color("Color 2"),
+                    Color("Color 3"),
+                    Color("Color 3"),
                     
                 ], startPoint: .top, endPoint: .bottom)
                 
@@ -455,12 +455,12 @@ struct Home: View {
                                 
                                 LinearGradient(colors: [
                                     
-                                    Color("Ring1"),
-                                    Color("Ring1")
+                                    Color("Color 2"),
+                                    Color("Color 2")
                                         .opacity(0.5),
-                                    Color("Ring1")
+                                    Color("Color 2")
                                         .opacity(0.3),
-                                    Color("Ring1")
+                                    Color("Color 2")
                                         .opacity(0.1),
                                     
                                 ], startPoint: .leading, endPoint: .trailing),
@@ -468,7 +468,7 @@ struct Home: View {
                                 style: StrokeStyle(lineWidth: 11, lineCap: .round, lineJoin: .round)
                             )
                         
-                            .shadow(color: Color("Ring1"), radius: 5, x: 1, y: -4)
+                            .shadow(color: Color("Color 3"), radius: 5, x: 1, y: -4)
                         
                         Circle()
                             .trim(from: isConnected ? 0 : 0.3, to: isConnected ? 1 : 0.55)
@@ -476,19 +476,19 @@ struct Home: View {
                                 
                                 LinearGradient(colors: [
                                     
-                                    Color("Ring2"),
-                                    Color("Ring2")
+                                    Color("Color 3"),
+                                    Color("Color 3")
                                         .opacity(0.5),
-                                    Color("Ring2")
+                                    Color("Color 3")
                                         .opacity(0.3),
-                                    Color("Ring2")
+                                    Color("Color 3")
                                         .opacity(0.1),
                                     
                                 ], startPoint: .leading, endPoint: .trailing),
                                 
                                 style: StrokeStyle(lineWidth: 11, lineCap: .round, lineJoin: .round)
                             )
-                            .shadow(color: Color("Ring2"), radius: 5, x: 1, y: -4)
+                            .shadow(color: Color("Color 3"), radius: 5, x: 1, y: -4)
                             .rotationEffect(.init(degrees: 160))
                         
                         

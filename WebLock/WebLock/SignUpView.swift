@@ -26,10 +26,10 @@ struct SignUpView: View {
         ZStack{
             LinearGradient(colors: [
                 
-                Color("BG1"),
-                Color("BG1"),
-                Color("BG2"),
-                Color("BG2"),
+                Color("Color 2"),
+                Color("Color 2"),
+                Color("Color 3"),
+                Color("Color 3"),
                 
             ], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
