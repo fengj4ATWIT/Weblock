@@ -64,6 +64,8 @@ class AppViewModel: ObservableObject{
         auth.sendPasswordReset(withEmail: email)
     }
     
+   
+    
 }
 
 struct SignInView: View {
@@ -98,6 +100,9 @@ struct SignInView: View {
             .ignoresSafeArea()
             
             VStack{
+                Text(getTitle())
+                    .foregroundColor(.white)
+                
               Image("AppIcon")
                     .resizable()
                     .scaledToFit()
@@ -265,8 +270,21 @@ struct SignInView: View {
                 Spacer()
                 
             }
-        .navigationTitle("WebLock")
+            }
+}
+
+func getTitle()->AttributedString{
+    var str = AttributedString("WebLock")
+    
+    if let range = str.range(of: "Web"){
+        str[range].font = .system(size: 24, weight: .light)
     }
+    
+    if let range = str.range(of: "Lock"){
+        str[range].font = .system(size: 24, weight: .black)
+    }
+    
+    return str
 }
 
 struct SignInView_Previews: PreviewProvider {

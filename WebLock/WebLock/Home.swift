@@ -47,8 +47,7 @@ struct Home: View {
                         Spacer()
                         
                         Menu {
-                            
-                            
+                           
                             NavigationLink("Link VPN"){
                                 LinkVPNView()
                             }
@@ -468,7 +467,7 @@ struct Home: View {
                                 style: StrokeStyle(lineWidth: 11, lineCap: .round, lineJoin: .round)
                             )
                         
-                            .shadow(color: Color("Color 3"), radius: 5, x: 1, y: -4)
+                            .shadow(color: Color("Color 2"), radius: 5, x: 1, y: -4)
                         
                         Circle()
                             .trim(from: isConnected ? 0 : 0.3, to: isConnected ? 1 : 0.55)
